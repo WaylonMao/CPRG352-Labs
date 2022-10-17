@@ -95,6 +95,7 @@ public class ShoppingListServlet extends HttpServlet {
             req.setAttribute("sumpage", sumpage);
             if (req.getParameter("page") != null) {
                 page = Integer.parseInt(req.getParameter("page"));
+                page = (page > sumpage) ? sumpage : page;
             } else {
                 req.setAttribute("page", page);
             }
