@@ -34,7 +34,6 @@ public class ShoppingListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        System.out.println(action);
         if (action != null) {
             HttpSession session = req.getSession();
             List<String> items;
@@ -96,7 +95,6 @@ public class ShoppingListServlet extends HttpServlet {
             req.setAttribute("sumpage", sumpage);
             if (req.getParameter("page") != null) {
                 page = Integer.parseInt(req.getParameter("page"));
-                System.out.println(page);
             } else {
                 req.setAttribute("page", page);
             }
