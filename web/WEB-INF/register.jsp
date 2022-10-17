@@ -10,9 +10,12 @@
         <h1>Shopping List</h1>
         <div>
             <form method="post">
-                <input type="text" name="username" required="required" onkeyup="this.value=this.value.replace(/[^\w+$]/g,'')" />
+                <input type="text" name="username" required="required" onkeyup="this.value = this.value.replace(/[^\w+$]/g, '')" />
                 <input type="hidden" name="action" value="register" />
                 <input type="submit" value="Register name" />
+                <div>
+                    <p>${message}</p>
+                </div>
             </form>
         </div>
     </body>

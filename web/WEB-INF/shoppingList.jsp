@@ -26,15 +26,40 @@
             </form>
         </div>
         <div>
-            <h2>Items</h2>
+            <h2>Items</h2>            
             <form method="post">
                 <ul>
-                    <c:forEach items="${items}" var="item" varStatus="index">
-                        <li><input type="radio" name="radioItem" value="${index.index}" />${item}</li>
+                    <c:forEach items="${showItems}" var="item" varStatus="index">
+                        <li><input type="radio" name="radioItem" value="${index.index + PAGE_SIZE * (page - 1)}" />${item}</li>
                         </c:forEach>
                 </ul>
+
+                <div>
+                    <c:if test="${sumpage > 1}">
+                        <div>
+                            <p>Page: ${page} Total: ${sumpage}</p>
+                        </div>
+                        <c:if test="${page > 1}">
+                            <a href="
+                               <c:url value='/'>
+                                   <c:param name='page' value='${page-1}'/>
+                               </c:url>
+                               ">&lt;PREVIOUS</a>
+                        </c:if>
+                        <c:if test="${page < sumpage}">
+                        <a href="
+                           <c:url value='/'>
+                               <c:param name='page' value='${page+1}'/>
+                           </c:url>
+                           ">NEXT&gt;</a>
+                        </c:if>
+                    </c:if>
+                </div>
                 <input type="hidden" name="action" value="delete" />
-                <input type="submit" value="Delete" />
+                <input type="submit" value="Delete" />       
+                <div>
+                    <p>${message}</p>
+                </div>
             </form>
         </div>
     </body>
