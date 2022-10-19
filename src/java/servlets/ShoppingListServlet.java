@@ -34,8 +34,8 @@ public class ShoppingListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        HttpSession session = req.getSession();
         if (action != null) {
-            HttpSession session = req.getSession();
             List<String> items;
             String item;
             switch (action) {
@@ -81,7 +81,8 @@ public class ShoppingListServlet extends HttpServlet {
                     break;
             }
         }
-        this.doGet(req, resp);
+        req.setAttribute("action", null);
+        resp.sendRedirect("/Lab6_ShoppingList");
         return;
     }
 
@@ -95,10 +96,11 @@ public class ShoppingListServlet extends HttpServlet {
             req.setAttribute("sumpage", sumpage);
             if (req.getParameter("page") != null) {
                 page = Integer.parseInt(req.getParameter("page"));
-                page = (page > sumpage) ? sumpage : page;
-            } else {
-                req.setAttribute("page", page);
+                session.setAttribute("pageSession",req.getParameter("page"));
+            } else if (session.getAttribute("pageSession") != null) {
+                page = Integer.parseInt((String) session.getAttribute("pageSession"));
             }
+            page = (page > sumpage) ? sumpage : page;
             if (page * PAGE_SIZE > items.size()) {
                 showItems = items.subList((page - 1) * PAGE_SIZE, items.size());
             } else {
