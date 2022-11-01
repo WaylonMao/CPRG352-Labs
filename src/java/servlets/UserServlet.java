@@ -43,6 +43,7 @@ public class UserServlet extends HttpServlet {
             }
             case "cancel": {
                 req.setAttribute("editUser", null);
+                req.setAttribute("message", "Cancel");
                 break;
             }
             case "update": {
