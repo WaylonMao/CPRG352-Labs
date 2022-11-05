@@ -1,5 +1,5 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@ taglib prefix="c"
-                                                                  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,119 +101,79 @@
                     </table>
                 </td>
                 <td>
-                    <c:if test="${editUser!=null}">
-                        <form method="post">
-                            <table class="side_table">
+                    <c:if test="${editUser!=null}">                        
+                        <table class="side_table">
+                            <form method="post">
                                 <tr>
                                     <td>Email:</td>
-                                    <td>
-                                        <c:if test="${editUser!=null}">${editUser.email}</c:if>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Active:</td>
-                                        <td>
-                                        <c:if test="${editUser!=null}">
-                                            <c:choose>
-                                                <c:when test="${editUser.active == true}">
-                                                    <input
-                                                        type="checkbox"
-                                                        name="active"
-                                                        value="1"
-                                                        checked
-                                                        />
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <input type="checkbox" name="active" value="1" />
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:if>
+                                    <td>${editUser.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Active:</td>
+                                    <td><c:choose>
+                                            <c:when test="${editUser.active == true}">
+                                                <input type="checkbox" name="active" value="1" checked />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <input type="checkbox" name="active" value="1" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>First Name:</td>
-                                    <td>
-                                        <c:if test="${editUser!=null}">
-                                            <input
-                                                type="text"
-                                                name="firstName"
-                                                value="${editUser.firstName}"
-                                                />
-                                        </c:if>
-                                    </td>
+                                    <td><input type="text" name="firstName" value="${editUser.firstName}" /></td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
-                                    <td>
-                                        <c:if test="${editUser!=null}">
-                                            <input
-                                                type="text"
-                                                name="lastName"
-                                                value="${editUser.lastName}"
-                                                />
-                                        </c:if>
-                                    </td>
+                                    <td><input type="text" name="lastName" value="${editUser.lastName}" /></td>
                                 </tr>
                                 <tr>
                                     <td>Password:</td>
-                                    <td>
-                                        <c:if test="${editUser!=null}">
-                                            <input
-                                                type="text"
-                                                name="password"
-                                                value="${editUser.password}"
-                                                />
-                                        </c:if>
-                                    </td>
+                                    <td><input type="text" name="password" value="${editUser.password}" /></td>
                                 </tr>
                                 <tr>
                                     <td>Role:</td>
-                                    <td>
-                                        <c:if test="${editUser!=null}">
-                                            <select name="roleId">
-                                                <c:forEach items="${roles}" var="role">
-                                                    <c:choose>
-                                                        <c:when test="${role.id==editUser.role.roleId}">
-                                                            <option value="${role.roleId}" selected>
-                                                                ${role.roleName}
-                                                            </option>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="${role.roleId}">${role.roleName}</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
-                                            </select>
-                                        </c:if>
+                                    <td><select name="roleId">
+                                            <c:forEach items="${roles}" var="role">
+                                                <c:choose>
+                                                    <c:when test="${role.roleId==editUser.role.roleId}">
+                                                        <option value="${role.roleId}" selected>
+                                                            ${role.roleName}
+                                                        </option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="${role.roleId}">${role.roleName}</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input
-                                            type="hidden"
-                                            name="email"
-                                            value="${editUser.email}"
-                                            />
+                                        <input type="hidden" name="email" value="${editUser.email}" />
                                         <input type="hidden" name="action" value="update" />
                                         <input type="submit" value="Save" />
                                     </td>
+                                    <td></td>
                                 </tr>
-                        </form>
-                <tr>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="action" value="cancel" />
-                            <input type="submit" value="Cancel" />
-                        </form>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </c:if>
-</tr>
-</table>
-<div class="message">
-    <c:if test="${message !=null}"><h2>${message}</h2></c:if>
-</div>
-</body>
+                            </form>
+                            <tr>
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" name="action" value="cancel" />
+                                        <input type="submit" value="Cancel" />
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </c:if>
+                </td>
+            </tr>
+        </table>
+        <div class="message">
+            <c:if test="${message !=null}"><h2>${message}</h2></c:if>
+        </div>
+    </body>
 </html>

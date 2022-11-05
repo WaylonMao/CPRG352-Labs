@@ -20,8 +20,8 @@ public class UserService {
 
     public User get(String email) {
         UserDB ud = new UserDB();
-        RoleService rs = new RoleService();
         User user = ud.get(email);
+        System.out.println("Get: " + user);
         return user;
     }
 
@@ -30,7 +30,7 @@ public class UserService {
         if (!validate(user)) {
             return "Invalid user data! Please try again.";
         }
-        if(ud.get(user.getEmail())!=null){
+        if (ud.get(user.getEmail()) != null) {
             return "User's email address already exists!";
         }
         ud.insert(user);
